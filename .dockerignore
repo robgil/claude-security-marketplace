@@ -1,0 +1,16 @@
+.git/
+.gitignore
+.dockerignore
+Dockerfile
+Makefile
+README.md
+LICENSE
+**/__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+node_modules/
+.DS_Store

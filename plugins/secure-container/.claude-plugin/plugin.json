@@ -1,0 +1,9 @@
+{
+  "name": "secure-container",
+  "version": "1.0.0",
+  "description": "Analyze Dockerfiles and provide recommendations for creating secure containers following best practices.",
+  "author": {
+    "name": "Rob Gil"
+  },
+  "keywords": ["security", "containers", "docker", "chainguard", "hardening"]
+}

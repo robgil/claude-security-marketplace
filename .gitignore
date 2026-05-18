@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+node_modules/
+package.json
+package-lock.json
+.husky/
+commitlint.config.*
+
+.DS_Store

@@ -1,0 +1,20 @@
+{
+  "name": "claude-security-marketplace",
+  "owner": {
+    "name": "Rob Gil",
+    "email": "rob@rem5.com"
+  },
+  "plugins": [
+    {
+      "name": "secure-container",
+      "source": "./plugins/secure-container",
+      "description": "Analyze Dockerfiles and provide recommendations for creating secure containers following best practices.",
+      "version": "1.0.0",
+      "category": "security",
+      "author": {
+        "name": "Rob Gil"
+      },
+      "keywords": ["security", "containers", "docker", "chainguard", "hardening"]
+    }
+  ]
+}
