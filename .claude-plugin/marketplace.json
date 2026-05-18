@@ -1,5 +1,6 @@
 {
   "name": "claude-security-marketplace",
+  "license": "Apache-2.0",
   "owner": {
     "name": "Rob Gil",
     "email": "rob@rem5.com"
@@ -11,6 +12,7 @@
       "description": "Analyze Dockerfiles and provide recommendations for creating secure containers following best practices.",
       "version": "1.0.0",
       "category": "security",
+      "license": "Apache-2.0",
       "author": {
         "name": "Rob Gil"
       },
