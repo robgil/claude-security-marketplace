@@ -10,6 +10,7 @@ ENV PYTHONPATH=/app
 
 COPY requirements.in ./
 COPY .claude-plugin/ ./.claude-plugin/
+COPY .github/ ./.github/
 COPY plugins/ ./plugins/
 COPY tests/ ./tests/
 
