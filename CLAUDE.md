@@ -14,6 +14,30 @@ Do not run `pytest`, `python -m pytest`, `pip install -r requirements.txt`, or a
 
 If a test fails inside the container, fix the code and re-run `make test`. Do not "quickly check" by invoking pytest locally.
 
+## Dependencies — hash-pinned, always
+
+All Python dependencies installed in the test container must be locked to an exact version and at least one `sha256` hash. This is non-negotiable — it prevents supply-chain attacks where a malicious release of a transitive dep could land in our test image.
+
+- Edit top-level deps in [requirements.in](requirements.in) only
+- Regenerate the lockfile with `make lock` (runs `pip-compile --generate-hashes` inside the Chainguard container — never on the host)
+- Commit `requirements.in` and `requirements.txt` together
+- The Dockerfile uses `pip install --require-hashes`, so any unhashed or unpinned entry will fail the container build
+- [tests/test_requirements_hashes.py](tests/test_requirements_hashes.py) enforces this on every `make test` run
+
+Do not hand-edit `requirements.txt`. Do not add `pip install` lines elsewhere in the Dockerfile that bypass `--require-hashes`. The Chainguard base image in [Dockerfile](Dockerfile) must also stay pinned to a `sha256:` digest, never a floating tag like `:latest-dev`.
+
+## CI — GitHub Actions pinned to commit SHAs
+
+Every `uses:` ref in [.github/workflows/](.github/workflows/) must be pinned to a full 40-character commit SHA, not a tag or branch. Tags can be force-pushed by a compromised maintainer; commit SHAs cannot.
+
+Keep the human-readable version as a trailing comment so reviewers know what they're looking at:
+
+```yaml
+- uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+```
+
+Resolve a tag to its SHA with `gh api repos/<owner>/<repo>/git/refs/tags/<tag> --jq '.object.sha'`. [tests/test_workflow_pins.py](tests/test_workflow_pins.py) rejects any `uses:` ref that isn't a 40-char hex SHA (local `./...` paths and `docker://...@sha256:` refs are also allowed).
+
 ## Skill naming
 
 Skill `name:` frontmatter fields must be **kebab-case slugs** (`^[a-z0-9]+(-[a-z0-9]+)*$`) and must match the skill directory name. Title Case names with spaces break Claude Code's `/<skill-name>` invocation. This is enforced by [tests/test_skill_frontmatter.py](tests/test_skill_frontmatter.py); changes that violate it will fail `make test`.
