@@ -1,10 +1,10 @@
 ---
-name: Secure Container Creation
+name: secure-container-review
 description: Analyze Dockerfiles and provide recommendations for creating secure containers following best practices
 version: 1.0.0
 ---
 
-# Secure Container Creation SKILL
+# Secure Container Review SKILL
 
 This SKILL helps create secure containers by analyzing Dockerfiles and providing recommendations for hardening container security.
 
@@ -318,7 +318,7 @@ The base image is the largest single contributor to a container's attack surface
 - The recommended approved replacement from the matrix above.
 - A note that this rule pairs with Rule #9 (digest pinning) — the approved replacement must still be pinned by `@sha256:...`.
 
-**Configuration:** The approved-registry allow-list and per-runtime replacement matrix should be configurable per organization (e.g., `secure-container.config.yaml`). The defaults reflect a "no commercial-vendor commitment" stance; orgs with RHEL subscriptions can promote `registry.access.redhat.com/*` higher, etc.
+**Configuration:** The approved-registry allow-list and per-runtime replacement matrix should be configurable per organization (e.g., `secure-container-review.config.yaml`). The defaults reflect a "no commercial-vendor commitment" stance; orgs with RHEL subscriptions can promote `registry.access.redhat.com/*` higher, etc.
 
 - Maps to: **CSF 2.0 GV.SC-04, GV.SC-05, GV.SC-06, GV.SC-07, ID.RA-09, ID.RA-10, PR.PS-05** (known/prioritized suppliers, supplier requirements, due diligence, third-party risk, authenticity, supplier risk, prevent unauthorized software) · **NIST 800-190 §4.5, §4.6** (Use of untrusted images, Registry security) · **NIST 800-53 SR-3** (Supply Chain Controls and Processes), **SR-4** (Provenance), **SR-5** (Acquisition Strategies), **SR-6** (Supplier Assessments), **SR-11** (Component Authenticity), **CM-7** (Least Functionality — limit to approved sources), **CM-11** (User-Installed Software — applied to base images) · **SSDF PO 1.1, PW 4.1** (define security requirements, reuse from approved sources) · **FedRAMP Vulnerability Scanning Requirements for Containers**.
 
@@ -329,7 +329,7 @@ Workloads subject to FIPS 140-2/140-3 requirements (FedRAMP, DoD, parts of HIPAA
 
 **Detection rules (conditional):**
 Active only when the user or configuration declares a FIPS-required context. Signals that activate the check:
-- A repository-level config flag (`secure-container.config.yaml: requireFips: true`).
+- A repository-level config flag (`secure-container-review.config.yaml: requireFips: true`).
 - A Dockerfile `LABEL` declaring compliance scope:
   - `LABEL compliance.fips="required"` or `LABEL org.opencontainers.image.compliance="fips-140-3"`.
   - `LABEL fedramp.scope="moderate"` / `"high"` (FedRAMP implies FIPS).

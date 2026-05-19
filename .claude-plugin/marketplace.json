@@ -7,8 +7,8 @@
   },
   "plugins": [
     {
-      "name": "secure-container",
-      "source": "./plugins/secure-container",
+      "name": "secure-container-review",
+      "source": "./plugins/secure-container-review",
       "description": "Analyze Dockerfiles and provide recommendations for creating secure containers following best practices.",
       "version": "1.0.0",
       "category": "security",

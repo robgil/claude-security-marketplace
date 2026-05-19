@@ -242,7 +242,7 @@ Maps to: NIST 800-190 §4.5, §4.6 · NIST 800-53 SR-3, SR-5, SR-11 · SSDF PO 1
 Workloads subject to FIPS 140-2/140-3 (FedRAMP Moderate/High, DoD SRG IL4/IL5, parts of HIPAA, contracts that incorporate FIPS by reference) must use a base image whose cryptographic libraries are FIPS-validated. Non-FIPS bases ship OpenSSL builds whose validation does not apply.
 
 Indicators that FIPS context applies:
-- Configuration flag (`secure-container.config.yaml: requireFips: true`).
+- Configuration flag (`secure-container-review.config.yaml: requireFips: true`).
 - Compliance `LABEL` on the Dockerfile (`LABEL compliance.fips="required"` or `LABEL fedramp.scope="moderate"`).
 - Repo marker (`.fips-required`, `compliance.yaml`).
 

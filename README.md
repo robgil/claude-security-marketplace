@@ -9,11 +9,11 @@ A [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugin-market
 ├── .claude-plugin/
 │   └── marketplace.json        # Marketplace manifest
 ├── plugins/
-│   └── secure-container/       # Plugin: Dockerfile security analysis
+│   └── secure-container-review/  # Plugin: Dockerfile security analysis
 │       ├── .claude-plugin/
 │       │   └── plugin.json
 │       ├── skills/
-│       │   └── secure-container/
+│       │   └── secure-container-review/
 │       │       ├── SKILL.md
 │       │       └── references/
 │       └── tests/
@@ -27,7 +27,7 @@ A [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugin-market
 
 | Name | Description |
 | --- | --- |
-| [secure-container](plugins/secure-container/) | Analyze Dockerfiles and recommend hardening per Chainguard best practices. |
+| [secure-container-review](plugins/secure-container-review/) | Analyze Dockerfiles and recommend hardening per Chainguard best practices. |
 
 ## Security frameworks assessed and mapped
 
@@ -57,7 +57,7 @@ Each plugin's `SKILL.md` includes a per-rule `Maps to:` line listing the exact c
 
 ```
 /plugin marketplace add <git-url-or-local-path>
-/plugin install secure-container@claude-security-marketplace
+/plugin install secure-container-review@claude-security-marketplace
 ```
 
 ## Development
@@ -82,7 +82,7 @@ Python is used **only** to validate the manifest schemas; runtime plugin behavio
 
 ## References
 
-The rules and reasoning behind the `secure-container` skill draw on the following background reading. The skill citations themselves reference NIST SP 800-190, NIST 800-53, NIST SSDF, CIS Docker Benchmark, FedRAMP container scanning guidance, and FIPS 140-2/140-3 — see [plugins/secure-container/skills/secure-container/SKILL.md](plugins/secure-container/skills/secure-container/SKILL.md) for the per-rule mapping.
+The rules and reasoning behind the `secure-container-review` skill draw on the following background reading. The skill citations themselves reference NIST SP 800-190, NIST 800-53, NIST SSDF, CIS Docker Benchmark, FedRAMP container scanning guidance, and FIPS 140-2/140-3 — see [plugins/secure-container-review/skills/secure-container-review/SKILL.md](plugins/secure-container-review/skills/secure-container-review/SKILL.md) for the per-rule mapping.
 
 - **["The Do's and Don'ts of Containers"](https://medium.com/@rem5/the-dos-and-don-ts-of-containers-0d1bd623a441)** by Rob Gil — the operational thesis behind several of the skill's rules: over-patch/under-harden, untrusted vendor and community containers, what belongs in a final image, and the case for purpose-built minimal distributions over general-purpose ones. Rules 1, 2, 5, 6, 11, 12, 13, and 14 in the skill are direct codifications of recommendations from this article.
 - **[NIST SP 800-190 — Application Container Security Guide](https://csrc.nist.gov/publications/detail/sp/800-190/final)** — the foundational NIST publication on container security; the skill's findings cite specific sections (§4.1 image vulnerabilities, §4.4 secrets, §4.5 untrusted images, §4.6 registry security).
