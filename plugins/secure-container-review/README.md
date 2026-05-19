@@ -1,4 +1,4 @@
-# Secure Container Creation SKILL
+# Secure Container Review SKILL
 
 This SKILL analyzes Dockerfiles and provides recommendations for creating secure containers following best practices.
 
@@ -19,7 +19,7 @@ This SKILL analyzes Dockerfiles and provides recommendations for creating secure
 ## Usage
 
 1. Place Dockerfile in your project
-2. Call the Secure Container Creation SKILL
+2. Call the Secure Container Review SKILL
 3. Review security recommendations provided
 4. Apply fixes as recommended
 
@@ -34,8 +34,8 @@ This SKILL analyzes Dockerfiles and provides recommendations for creating secure
 
 ## Documentation
 
-- [Security Best Practices](plugins/secure-container/references/security_best_practices.md)
-- [Chainguard Guidelines](plugins/secure-container/references/chainguard_guidelines.md)
+- [Security Best Practices](skills/secure-container-review/references/security_best_practices.md)
+- [Chainguard Guidelines](skills/secure-container-review/references/chainguard_guidelines.md)
 
 ## Testing
 

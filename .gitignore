@@ -12,4 +12,7 @@ package-lock.json
 .husky/
 commitlint.config.*
 
+# Analysis output (regenerated locally / in CI; not tracked)
+reports/
+
 .DS_Store

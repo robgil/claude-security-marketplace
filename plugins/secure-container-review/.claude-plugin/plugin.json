@@ -1,9 +1,10 @@
 {
-  "name": "secure-container",
+  "name": "secure-container-review",
   "version": "1.0.0",
   "description": "Analyze Dockerfiles and provide recommendations for creating secure containers following best practices.",
   "author": {
     "name": "Rob Gil"
   },
+  "license": "Apache-2.0",
   "keywords": ["security", "containers", "docker", "chainguard", "hardening"]
 }
