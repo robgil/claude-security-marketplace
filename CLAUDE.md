@@ -14,6 +14,18 @@ Do not run `pytest`, `python -m pytest`, `pip install -r requirements.txt`, or a
 
 If a test fails inside the container, fix the code and re-run `make test`. Do not "quickly check" by invoking pytest locally.
 
+## Dependencies — hash-pinned, always
+
+All Python dependencies installed in the test container must be locked to an exact version and at least one `sha256` hash. This is non-negotiable — it prevents supply-chain attacks where a malicious release of a transitive dep could land in our test image.
+
+- Edit top-level deps in [requirements.in](requirements.in) only
+- Regenerate the lockfile with `make lock` (runs `pip-compile --generate-hashes` inside the Chainguard container — never on the host)
+- Commit `requirements.in` and `requirements.txt` together
+- The Dockerfile uses `pip install --require-hashes`, so any unhashed or unpinned entry will fail the container build
+- [tests/test_requirements_hashes.py](tests/test_requirements_hashes.py) enforces this on every `make test` run
+
+Do not hand-edit `requirements.txt`. Do not add `pip install` lines elsewhere in the Dockerfile that bypass `--require-hashes`. The Chainguard base image in [Dockerfile](Dockerfile) must also stay pinned to a `sha256:` digest, never a floating tag like `:latest-dev`.
+
 ## Skill naming
 
 Skill `name:` frontmatter fields must be **kebab-case slugs** (`^[a-z0-9]+(-[a-z0-9]+)*$`) and must match the skill directory name. Title Case names with spaces break Claude Code's `/<skill-name>` invocation. This is enforced by [tests/test_skill_frontmatter.py](tests/test_skill_frontmatter.py); changes that violate it will fail `make test`.
