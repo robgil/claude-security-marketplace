@@ -33,7 +33,7 @@ Every `uses:` ref in [.github/workflows/](.github/workflows/) must be pinned to 
 Keep the human-readable version as a trailing comment so reviewers know what they're looking at:
 
 ```yaml
-- uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+- uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 ```
 
 Resolve a tag to its SHA with `gh api repos/<owner>/<repo>/git/refs/tags/<tag> --jq '.object.sha'`. [tests/test_workflow_pins.py](tests/test_workflow_pins.py) rejects any `uses:` ref that isn't a 40-char hex SHA (local `./...` paths and `docker://...@sha256:` refs are also allowed).
